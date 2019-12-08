@@ -2,43 +2,21 @@ require 'httparty'
 
 # Graph API helper methods
 module AnalyticsHelper
-  GRAPH_HOST = 'https://graph.microsoft.com'.freeze
 
-
-
-
-
-  
-
-
-
-  def make_api_call(endpoint, token, params = nil)
+  def call_api(url, token)
     headers = {
       Authorization: "Bearer #{token}"
     }
 
-    query = params || {}
-
-
-
-    HTTParty.get "#{GRAPH_HOST}#{endpoint}",
-                 headers: headers
-                 # ,
-                 # query: query
+    HTTParty.get url, headers: headers
   end
 
-  def get_analytics(token)
-# https://graph.microsoft.com/beta/me/analytics/activitystatistics
-    get_events_url = '/beta/me/analytics/activitystatistics'
-
-    # query = {
-    #   '$select': 'subject,organizer,start,end',
-    #   '$orderby': 'createdDateTime DESC'
-    # }
-
-    response = make_api_call get_events_url, token
-
-    raise response.parsed_response.to_s || "Request returned #{response.code}" unless response.code == 200
-    response.parsed_response['value']
+  def get_analytics(token, type)
+      #types = ['call', 'chat', 'email', 'focus', 'meeting']
+      url = "https://graph.microsoft.com/beta/me/analytics/activitystatistics/#{type}_2019-12-05_2019-12-06"
+      response = call_api(url, token)
+      ap response
+      raise response.parsed_response.to_s || "Request returned #{response.code}" unless response.code == 200
+      response
   end
 end

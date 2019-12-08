@@ -1,21 +1,75 @@
-<h1>Calendar</h1>
+<h1>Analytics</h1>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Organizer</th>
-      <th scope="col">Subject</th>
-      <th scope="col">Start</th>
-      <th scope="col">End</th>
+      <th scope="col">Activity Type</th>
+      <th scope="col">Time Spent on Activity (Hours)</th>
     </tr>
   </thead>
   <tbody>
-    <% @events.each do |event| %>
       <tr>
-        <td><%= event['organizer']['emailAddress']['name'] %></td>
-        <td><%= event['subject'] %></td>
-        <td><%= event['start']['dateTime'].to_time(:utc).localtime.strftime('%-m/%-d/%y %l:%M %p') %></td>
-        <td><%= event['end']['dateTime'].to_time(:utc).localtime.strftime('%-m/%-d/%y %l:%M %p') %></td>
+        <td>Time Calls</td>
+        <td><%= ActiveSupport::Duration.parse(ActiveSupport::Duration.parse(@call["duration"])) %></td>
       </tr>
-    <% end %>
+      <tr>
+        <td>After Hours Calls</td>
+        <td><%= ActiveSupport::Duration.parse(@call["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Chats</td>
+        <td><%= ActiveSupport::Duration.parse(@chat["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Chats</td>
+        <td><%= ActiveSupport::Duration.parse(@chat["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Emails</td>
+        <td><%= ActiveSupport::Duration.parse(@email["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Emails</td>
+        <td><%= ActiveSupport::Duration.parse(@email["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Read Email</td>
+        <td><%= ActiveSupport::Duration.parse(@email["readEmail"]) %></td>
+      </tr>
+      <tr>
+        <td>Sent Email</td>
+        <td><%= ActiveSupport::Duration.parse(@email["sentEmail"]) %></td>
+      </tr>
+      <tr>
+        <td>Focus</td>
+        <td><%= ActiveSupport::Duration.parse(@focus["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Organized Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["organized"]) %></td>
+      </tr>
+      <tr>
+        <td>Recurring Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["recurring"]) %></td>
+      </tr>
+      <tr>
+        <td>Long Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["long"]) %></td>
+      </tr>
+      <tr>
+        <td>Conflicting Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["conflicting"]) %></td>
+      </tr>
+      <tr>
+        <td>Multitasking Meetings</td>
+        <td><%= ActiveSupport::Duration.parse(@meeting["multitasking"]) %></td>
+      </tr>
   </tbody>
 </table>

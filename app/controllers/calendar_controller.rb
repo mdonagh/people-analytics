@@ -5,7 +5,11 @@ class CalendarController < ApplicationController
 
   def index
     @events = get_calendar_events access_token || []
-    puts get_analytics(access_token)
+    @call = get_analytics(access_token, 'call')
+    @chat = get_analytics(access_token, 'chat')
+    @email = get_analytics(access_token, 'email')
+    @focus = get_analytics(access_token, 'focus')
+    @meeting = get_analytics(access_token, 'meeting')
   rescue RuntimeError => e
     @errors = [
       {
