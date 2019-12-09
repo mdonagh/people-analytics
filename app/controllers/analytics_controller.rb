@@ -16,6 +16,7 @@ class AnalyticsController < ApplicationController
         debug: e
       }
     ]
+    redirect_to analytics_url
   end
 
   def selected_date

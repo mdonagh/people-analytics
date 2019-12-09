@@ -3,8 +3,7 @@ require 'date'
 # Graph API helper methods
 module AnalyticsHelper
   def readable_duration(duration)
-    return "0" if duration == 'PT0S'
-    DateTime.parse(duration).strftime('%l').strip
+    (ActiveSupport::Duration.parse(duration).value / 60).round(1)
   end
 
   def call_api(url, token)
@@ -16,9 +15,9 @@ module AnalyticsHelper
   end
 
   def get_analytics(token, type, date)
-      #types = ['call', 'chat', 'email', 'focus', 'meeting']
       url = "https://graph.microsoft.com/beta/me/analytics/activitystatistics/#{type}_#{date}"
       response = call_api(url, token)
+      puts response.inspect
       raise response.parsed_response.to_s || "Request returned #{response.code}" unless response.code == 200
       response
   end
