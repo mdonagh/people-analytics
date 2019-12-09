@@ -4,7 +4,6 @@ class AnalyticsController < ApplicationController
 
   def index
     @selected_date = params["date"] ? parse_date(params["date"]) : parse_date(Date.today)
-    puts @selected_date
     @call = get_analytics(access_token, 'call', @selected_date)
     @chat = get_analytics(access_token, 'chat', @selected_date)
     @email = get_analytics(access_token, 'email', @selected_date)

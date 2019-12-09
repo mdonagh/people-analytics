@@ -3,10 +3,7 @@ require 'date'
 # Graph API helper methods
 module AnalyticsHelper
   def readable_duration(duration)
-    puts duration
-    puts 'nyah'
     return "0" if duration == 'PT0S'
-    puts duration
     DateTime.parse(duration).strftime('%l').strip
   end
 
