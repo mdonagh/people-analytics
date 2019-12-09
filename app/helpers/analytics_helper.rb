@@ -1,7 +1,14 @@
 require 'httparty'
-
+require 'date'
 # Graph API helper methods
 module AnalyticsHelper
+  def readable_duration(duration)
+    puts duration
+    puts 'nyah'
+    return "0" if duration == 'PT0S'
+    puts duration
+    DateTime.parse(duration).strftime('%l').strip
+  end
 
   def call_api(url, token)
     headers = {
@@ -11,12 +18,16 @@ module AnalyticsHelper
     HTTParty.get url, headers: headers
   end
 
-  def get_analytics(token, type)
+  def get_analytics(token, type, date)
       #types = ['call', 'chat', 'email', 'focus', 'meeting']
-      url = "https://graph.microsoft.com/beta/me/analytics/activitystatistics/#{type}_2019-12-05_2019-12-06"
+      url = "https://graph.microsoft.com/beta/me/analytics/activitystatistics/#{type}_#{date}"
       response = call_api(url, token)
-      ap response
       raise response.parsed_response.to_s || "Request returned #{response.code}" unless response.code == 200
       response
+  end
+
+  def parse_date(date)
+    date = Date.strptime(date, "%m/%d/%Y") if date.is_a?(String)
+    "#{date.yesterday.strftime('%Y-%m-%d')}_#{date.strftime('%Y-%m-%d')}"
   end
 end

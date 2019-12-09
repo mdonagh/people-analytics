@@ -1,0 +1,85 @@
+<h1>Analytics</h1>
+
+
+<%= form_with(url: "/analytics/", method: "post") do %>
+<div class="form-row col-sm-4" style="margin-top:40px;margin-bottom:40px;">
+  <%= text_field_tag 'date', nil, class: 'form-control col', id: 'datepicker', placeholder: 'Date' %>
+  <%= submit_tag 'Submit', class: 'btn btn-primary col', style: 'margin-left:30px;' %>
+    </div>
+<% end %>
+<script>
+$( function() {
+  $( "#datepicker" ).datepicker();
+} );
+</script>
+Time analytics from <%= @selected_date.split('_').first %> to <%= @selected_date.split('_').last %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Activity Type</th>
+      <th scope="col">Time Spent on Activity (Hours)</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>Time Calls</td>
+        <td><%= readable_duration(@call["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Calls</td>
+        <td><%= readable_duration(@call["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Chats</td>
+        <td><%= readable_duration(@chat["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Chats</td>
+        <td><%= readable_duration(@chat["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Emails</td>
+        <td><%= readable_duration(@email["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Emails</td>
+        <td><%= readable_duration(@email["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Read Email</td>
+        <td><%= readable_duration(@email["readEmail"]) %></td>
+      </tr>
+      <tr>
+        <td>Sent Email</td>
+        <td><%= readable_duration(@email["sentEmail"]) %></td>
+      </tr>
+      <tr>
+        <td>Focus</td>
+        <td><%= readable_duration(@focus["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>Meetings</td>
+        <td><%= readable_duration(@meeting["duration"]) %></td>
+      </tr>
+      <tr>
+        <td>After Hours Meetings</td>
+        <td><%= readable_duration(@meeting["afterHours"]) %></td>
+      </tr>
+      <tr>
+        <td>Organized Meetings</td>
+        <td><%= readable_duration(@meeting["organized"]) %></td>
+      </tr>
+      <tr>
+        <td>Recurring Meetings</td>
+        <td><%= readable_duration(@meeting["recurring"]) %></td>
+      </tr>
+      <tr>
+        <td>Long Meetings</td>
+        <td><%= readable_duration(@meeting["long"]) %></td>
+      </tr>
+      <tr>
+        <td>Conflicting Meetings</td>
+        <td><%= readable_duration(@meeting["conflicting"]) %></td>
+      </tr>
+  </tbody>
+</table>

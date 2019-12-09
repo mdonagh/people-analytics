@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'calendar/index'
-  get 'home/index'
   root 'home#index'
+  get 'analytics/index', as: 'analytics'
+  post 'analytics' => 'analytics#selected_date'
+  get 'home/index'
 
   # Add future routes here
   get 'auth/signin'
