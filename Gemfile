@@ -62,6 +62,6 @@ gem 'omniauth-oauth2', '~> 1.5'
 
 gem 'httparty', '~> 0.16.2'
 
-gem 'nokogiri', '~> 1.8'
+gem 'nokogiri', '~> 1.11'
 
 gem 'activerecord-session_store', '~> 1.1'
